@@ -1,18 +1,556 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Google Verification -->
-    <meta name="google-site-verification" content="PkLa_ViOo6FAHpvh8SacceMb95o9tePRdrqLNBz9X1M" />
+<!-- Google Verification -->
+<meta name="google-site-verification" content="PkLa_ViOo6FAHpvh8SacceMb95o9tePRdrqLNBz9X1M" />
 
-    <!-- SEO Meta -->
-    <title>UX Psychology Tools for Cognitive Load, Decision Fatigue & Interaction Design</title>
-    <meta name="description" content="Analyze user behavior with UX psychology tools including cognitive load calculators, Fitts’s Law checkers, Hick’s Law calculators, and visual hierarchy scoring. Improve usability and conversions.">
+<!-- SEO Meta -->
+<title>UX Psychology Tools for Cognitive Load, Decision Fatigue & Interaction Design</title>
+<meta name="description" content="Analyze user behavior with UX psychology tools including cognitive load calculators, Fitts's Law checkers, Hick's Law calculators, and visual hierarchy scoring. Improve usability and conversions.">
 
-    <!-- Keywords -->
-    <meta name="keywords" content="ux psychology tools, cognitive load calculator ux, hicks law calculator ux, fitts law checker ui design, decision fatigue calculator ux, visual hierarchy score tool, mental model mismatch checker">
+<!-- Keywords -->
+<meta name="keywords" content="ux psychology tools, cognitive load calculator ux, cognitive load calculator, hicks law calculator ux, fitts law checker ui design, decision fatigue calculator ux, visual hierarchy score tool, mental model mismatch checker, ux design calculator, preventive design tool">
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    :root {
+        --primary: #5B5FFF;
+        --primary-dark: #3D41D9;
+        --secondary: #00D4FF;
+        --accent: #FF6B9D;
+        --bg-dark: #0F1419;
+        --bg-lighter: #1a1f2e;
+        --text-primary: #F5F7FB;
+        --text-secondary: #B8BFD9;
+        --border-color: #2a2f42;
+        --success: #4CAF50;
+        --warning: #FF9800;
+        --danger: #F44336;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, var(--bg-dark) 0%, #1a1625 100%);
+        color: var(--text-primary);
+        line-height: 1.6;
+        overflow-x: hidden;
+    }
+
+    /* Typography */
+    h1, h2, h3 {
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+
+    h1 {
+        font-size: 2.8rem;
+        background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        letter-spacing: -0.5px;
+    }
+
+    h2 {
+        font-size: 2rem;
+        color: var(--text-primary);
+        margin-top: 2.5rem;
+        position: relative;
+        padding-bottom: 0.5rem;
+    }
+
+    h2::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        border-radius: 2px;
+    }
+
+    h3 {
+        font-size: 1.4rem;
+        color: var(--secondary);
+        margin-top: 1.5rem;
+    }
+
+    p {
+        font-size: 1rem;
+        color: var(--text-secondary);
+        margin-bottom: 1rem;
+        line-height: 1.8;
+    }
+
+    a {
+        color: var(--secondary);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    a:hover {
+        color: var(--accent);
+        text-decoration: underline;
+    }
+
+    /* Container & Layout */
+    header {
+        padding: 4rem 2rem;
+        text-align: center;
+        border-bottom: 1px solid var(--border-color);
+        background: linear-gradient(180deg, rgba(91, 95, 255, 0.1) 0%, transparent 100%);
+    }
+
+    header h1 {
+        margin-bottom: 1rem;
+        font-size: 3rem;
+    }
+
+    header p {
+        font-size: 1.1rem;
+        max-width: 800px;
+        margin: 0 auto;
+        color: var(--text-secondary);
+    }
+
+    section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 3rem 2rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    section:last-of-type {
+        border-bottom: none;
+    }
+
+    /* Cards & Articles */
+    article {
+        background: linear-gradient(135deg, rgba(91, 95, 255, 0.08) 0%, rgba(0, 212, 255, 0.05) 100%);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    article:hover {
+        border-color: var(--primary);
+        background: linear-gradient(135deg, rgba(91, 95, 255, 0.15) 0%, rgba(0, 212, 255, 0.1) 100%);
+        transform: translateY(-3px);
+    }
+
+    article h3 {
+        margin-top: 0;
+    }
+
+    article p {
+        margin-bottom: 1rem;
+        color: var(--text-secondary);
+    }
+
+    article a {
+        display: inline-block;
+        padding: 0.6rem 1.2rem;
+        background: var(--primary);
+        color: white;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        margin-top: 0.5rem;
+    }
+
+    article a:hover {
+        background: var(--primary-dark);
+        color: var(--secondary);
+        text-decoration: none;
+        transform: translateX(3px);
+    }
+
+    /* List Styles */
+    ul, ol {
+        margin: 1.5rem 0 1.5rem 2rem;
+    }
+
+    li {
+        margin-bottom: 0.8rem;
+        color: var(--text-secondary);
+    }
+
+    /* Comparison Table */
+    .comparison-table {
+        width: 100%;
+        margin: 2rem 0;
+        border-collapse: collapse;
+        background: var(--bg-lighter);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .comparison-table th {
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        color: white;
+        padding: 1rem;
+        text-align: left;
+        font-weight: 600;
+    }
+
+    .comparison-table td {
+        padding: 1rem;
+        border-bottom: 1px solid var(--border-color);
+        color: var(--text-secondary);
+    }
+
+    .comparison-table tr:last-child td {
+        border-bottom: none;
+    }
+
+    .comparison-table tr:hover {
+        background: rgba(91, 95, 255, 0.05);
+    }
+
+    /* Calculator Section */
+    .calculator-section {
+        background: linear-gradient(135deg, rgba(91, 95, 255, 0.1) 0%, rgba(0, 212, 255, 0.05) 100%);
+        border: 2px solid var(--border-color);
+        border-radius: 16px;
+        padding: 2rem;
+        margin: 2rem 0;
+    }
+
+    .calculator-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    @media (max-width: 768px) {
+        .calculator-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .input-group {
+        margin-bottom: 1.5rem;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: var(--secondary);
+        font-weight: 600;
+        font-size: 0.95rem;
+    }
+
+    input[type="number"],
+    input[type="range"],
+    select {
+        width: 100%;
+        padding: 0.8rem;
+        background: var(--bg-darker, #0a0e16);
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        color: var(--text-primary);
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+    }
+
+    input[type="number"]:focus,
+    input[type="range"]:focus,
+    select:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 8px rgba(91, 95, 255, 0.3);
+    }
+
+    input[type="range"] {
+        padding: 0.5rem;
+        cursor: pointer;
+    }
+
+    .range-label {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        margin-top: 0.3rem;
+    }
+
+    .button-group {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    button {
+        flex: 1;
+        padding: 1rem;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(91, 95, 255, 0.3);
+    }
+
+    button:active {
+        transform: translateY(0);
+    }
+
+    button.secondary {
+        background: transparent;
+        border: 2px solid var(--primary);
+        color: var(--primary);
+    }
+
+    button.secondary:hover {
+        background: rgba(91, 95, 255, 0.1);
+    }
+
+    /* Results Display */
+    .results {
+        display: none;
+        background: var(--bg-lighter);
+        border-left: 4px solid var(--primary);
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-top: 2rem;
+    }
+
+    .results.show {
+        display: block;
+        animation: slideIn 0.4s ease;
+    }
+
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .score-display {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+    }
+
+    .score-card {
+        background: linear-gradient(135deg, rgba(91, 95, 255, 0.15) 0%, rgba(0, 212, 255, 0.1) 100%);
+        border: 1px solid var(--border-color);
+        padding: 1.5rem;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    .score-card h4 {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 0.5rem;
+    }
+
+    .score-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin: 0.5rem 0;
+    }
+
+    .score-number.low {
+        color: var(--success);
+    }
+
+    .score-number.medium {
+        color: var(--warning);
+    }
+
+    .score-number.high {
+        color: var(--danger);
+    }
+
+    .score-label {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+    }
+
+    .recommendations {
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border-color);
+    }
+
+    .recommendations h4 {
+        color: var(--secondary);
+        margin-bottom: 1rem;
+    }
+
+    .rec-item {
+        background: rgba(76, 175, 80, 0.1);
+        border-left: 3px solid var(--success);
+        padding: 1rem;
+        margin-bottom: 0.8rem;
+        border-radius: 4px;
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+    }
+
+    /* Tools Grid */
+    .tools-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin: 2rem 0;
+    }
+
+    /* FAQ Section */
+    .faq-item {
+        background: var(--bg-lighter);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        overflow: hidden;
+    }
+
+    .faq-question {
+        padding: 1.2rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: background 0.3s ease;
+        font-weight: 600;
+        color: var(--secondary);
+    }
+
+    .faq-question:hover {
+        background: rgba(91, 95, 255, 0.1);
+    }
+
+    .faq-toggle {
+        font-size: 1.5rem;
+        transition: transform 0.3s ease;
+    }
+
+    .faq-toggle.open {
+        transform: rotate(180deg);
+    }
+
+    .faq-answer {
+        display: none;
+        padding: 0 1.2rem 1.2rem 1.2rem;
+        color: var(--text-secondary);
+        border-top: 1px solid var(--border-color);
+        animation: expand 0.3s ease;
+    }
+
+    .faq-answer.show {
+        display: block;
+    }
+
+    @keyframes expand {
+        from {
+            opacity: 0;
+            max-height: 0;
+        }
+        to {
+            opacity: 1;
+            max-height: 500px;
+        }
+    }
+
+    /* Footer */
+    footer {
+        text-align: center;
+        padding: 2rem;
+        border-top: 1px solid var(--border-color);
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+    }
+
+    footer p {
+        margin: 0.5rem 0;
+    }
+
+    /* Utility Classes */
+    .highlight {
+        color: var(--secondary);
+        font-weight: 600;
+    }
+
+    .badge {
+        display: inline-block;
+        padding: 0.3rem 0.8rem;
+        background: rgba(91, 95, 255, 0.2);
+        border: 1px solid var(--primary);
+        border-radius: 20px;
+        font-size: 0.85rem;
+        color: var(--primary);
+        margin: 0.5rem 0.5rem 0 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 2rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+        }
+
+        header {
+            padding: 2rem 1.5rem;
+        }
+
+        section {
+            padding: 2rem 1.5rem;
+        }
+
+        .calculator-section {
+            padding: 1.5rem;
+        }
+
+        .score-display {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
 
 </head>
 
@@ -36,86 +574,324 @@
     <ul>
         <li>Reduce cognitive load and improve usability</li>
         <li>Optimize decision-making processes</li>
-        <li>Apply UX laws like Fitts’s and Hick’s Law</li>
+        <li>Apply UX laws like Fitts's and Hick's Law</li>
         <li>Improve visual hierarchy and attention flow</li>
         <li>Align interfaces with user mental models</li>
     </ul>
 </section>
 
 <section>
-    <h2>UX Psychology Tools List</h2>
+    <h2>Cognitive Load Calculator vs Other Tools</h2>
+    <p>
+        Understanding how to measure cognitive load is critical for preventive UX design. Here's how our approach differs from existing tools in the market.
+    </p>
 
-    <article>
-        <h3>Attention Ratio Analyzer</h3>
-        <p>
-            Measure how effectively attention is distributed across UI elements.
-        </p>
-        <a href="/ux_psychology_tools/attention_ratio_analyzer">Open Attention Analyzer</a>
-    </article>
 
-    <article>
-        <h3>Cognitive Load Calculator</h3>
-        <p>
-            Estimate cognitive load to identify complexity and usability issues.
-        </p>
-        <a href="/ux_psychology_tools/cognitive_load_calculator">Open Cognitive Load Tool</a>
-    </article>
+<h3>Preventive vs Reactive Tools</h3>
+<p>
+    Cognitive load analysis can happen at two stages: <span class="highlight">during the design phase (preventive)</span> or after a page is built (reactive). Most tools on the market are auditors that measure cognitive load after the fact. Our calculator is designed to help you identify cognitive complexity before your designs go into development.
+</p>
 
-    <article>
-        <h3>Decision Fatigue Calculator</h3>
-        <p>
-            Analyze how many decisions users must make and reduce fatigue in flows.
-        </p>
-        <a href="/ux_psychology_tools/decision_fatigue_calculator">Open Decision Fatigue Tool</a>
-    </article>
+<h3>Tool Comparison: Preventive Design Calculator vs Alternatives</h3>
+<table class="comparison-table">
+    <thead>
+        <tr>
+            <th>Feature</th>
+            <th>Our Calculator</th>
+            <th>Cogulator (MITRE)</th>
+            <th>DoxLayer Auditor</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Type</strong></td>
+            <td>Preventive Design Tool</td>
+            <td>Desktop Application</td>
+            <td>Reactive Auditor</td>
+        </tr>
+        <tr>
+            <td><strong>Access</strong></td>
+            <td>Web-based (instant)</td>
+            <td>Download & Install</td>
+            <td>Web-based</td>
+        </tr>
+        <tr>
+            <td><strong>When to Use</strong></td>
+            <td>During wireframing/design</td>
+            <td>Technical research (GOMS)</td>
+            <td>After page is built</td>
+        </tr>
+        <tr>
+            <td><strong>Learning Curve</strong></td>
+            <td>Low (intuitive)</td>
+            <td>Very High (technical)</td>
+            <td>Medium</td>
+        </tr>
+        <tr>
+            <td><strong>Target Audience</strong></td>
+            <td>UX Designers</td>
+            <td>Researchers/Ergonomists</td>
+            <td>Web Professionals</td>
+        </tr>
+        <tr>
+            <td><strong>Output</strong></td>
+            <td>Score + Design Recommendations</td>
+            <td>Detailed GOMS Model</td>
+            <td>Page Audit Report</td>
+        </tr>
+        <tr>
+            <td><strong>Cost</strong></td>
+            <td>Free</td>
+            <td>Free (Open Source)</td>
+            <td>Free</td>
+        </tr>
+    </tbody>
+</table>
 
-    <article>
-        <h3>Fitts’s Law Checker</h3>
-        <p>
-            Evaluate interaction efficiency based on target size and distance.
-        </p>
-        <a href="/ux_psychology_tools/fitts_law_checker">Open Fitts’s Law Tool</a>
-    </article>
+<h3>When to Use Each Tool</h3>
+<p>
+    <strong>Use Our Calculator If...</strong>
+</p>
+<ul>
+    <li>You're designing a new interface and want to assess cognitive load before development</li>
+    <li>You need quick feedback on information architecture complexity</li>
+    <li>You're comparing design options and need a simple score to validate your choice</li>
+    <li>You're a UX designer without a research background</li>
+</ul>
 
-    <article>
-        <h3>Hick’s Law Calculator</h3>
-        <p>
-            Calculate decision time based on the number of choices presented to users.
-        </p>
-        <a href="/ux_psychology_tools/hicks_law_calculator">Open Hick’s Law Tool</a>
-    </article>
+<p>
+    <strong>Use Cogulator If...</strong>
+</p>
+<ul>
+    <li>You need detailed GOMS (Goals, Operators, Methods, Selection) modeling</li>
+    <li>You're doing formal human performance research</li>
+    <li>You need desktop modeling for complex task sequences</li>
+    <li>You have a technical research team</li>
+</ul>
 
-    <article>
-        <h3>Mental Model Mismatch Checker</h3>
-        <p>
-            Identify mismatches between user expectations and interface behavior.
-        </p>
-        <a href="/ux_psychology_tools/mental_model_mismatch_checker">Open Mental Model Tool</a>
-    </article>
+<p>
+    <strong>Use DoxLayer Cognitive Load Auditor If...</strong>
+</p>
+<ul>
+    <li>Your page is already built and you want to audit it</li>
+    <li>You need text complexity and readability analysis (Flesch score)</li>
+    <li>You want to measure how your published content performs</li>
+    <li>You prefer a broader suite of web tools</li>
+</ul>
 
-    <article>
-        <h3>Visual Hierarchy Score</h3>
-        <p>
-            Evaluate how well visual hierarchy guides user attention and interaction.
-        </p>
-        <a href="/ux_psychology_tools/visual_hierarchy_score">Open Hierarchy Score Tool</a>
-    </article>
+
+</section>
+
+<section class="calculator-section">
+    <h2>Cognitive Load Calculator</h2>
+    <p>
+        Use this <span class="highlight">preventive design tool</span> to estimate cognitive load before your interface goes into development. Input your design parameters and receive a cognitive load score (0-100) with actionable recommendations.
+    </p>
+
+
+<h3>How It Works</h3>
+<p>
+    This calculator estimates cognitive load based on: the number of UI elements users must process, decision points in the flow, information density, and interaction complexity. The score reflects how mentally demanding your interface will be for typical users.
+</p>
+
+<div class="calculator-grid">
+    <div>
+        <div class="input-group">
+            <label for="ui-elements">Number of UI Elements</label>
+            <input type="number" id="ui-elements" min="0" max="100" value="10" placeholder="e.g., buttons, inputs, cards">
+            <div class="range-label">
+                <span>Few (1-10)</span>
+                <span>Many (50+)</span>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="decision-points">Decision Points in Flow</label>
+            <input type="number" id="decision-points" min="0" max="20" value="3" placeholder="e.g., where users must choose">
+            <div class="range-label">
+                <span>Linear (1)</span>
+                <span>Complex (20+)</span>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="text-density">Information Density</label>
+            <select id="text-density">
+                <option value="1">Minimal (lots of whitespace)</option>
+                <option value="2" selected>Moderate (balanced)</option>
+                <option value="3">High (dense with content)</option>
+                <option value="4">Very High (text-heavy)</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label for="interaction-complexity">Interaction Complexity</label>
+            <select id="interaction-complexity">
+                <option value="1">Simple (static, no interactions)</option>
+                <option value="2" selected>Moderate (basic interactions)</option>
+                <option value="3">Complex (multi-step flows)</option>
+                <option value="4">Very Complex (animations, drag-drop)</option>
+            </select>
+        </div>
+    </div>
+
+    <div>
+        <div class="input-group">
+            <label for="visual-hierarchy">Visual Hierarchy Clarity</label>
+            <select id="visual-hierarchy">
+                <option value="1">Very Clear (strong visual distinction)</option>
+                <option value="2" selected>Clear (good hierarchy)</option>
+                <option value="3">Unclear (weak hierarchy)</option>
+                <option value="4">No Hierarchy (elements equally prominent)</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label for="cognitive-shortcuts">Familiar Patterns</label>
+            <select id="cognitive-shortcuts">
+                <option value="1">Heavily Used (common UI patterns)</option>
+                <option value="2" selected>Moderately Used (mix of familiar & novel)</option>
+                <option value="3">Few (mostly custom interfaces)</option>
+                <option value="4">None (completely novel design)</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label for="memory-load">Working Memory Load</label>
+            <input type="range" id="memory-load" min="1" max="5" value="2">
+            <div class="range-label">
+                <span>Low (minimal recall)</span>
+                <span>Very High (lots to remember)</span>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button onclick="calculateCognitiveLoad()">Calculate Score</button>
+            <button class="secondary" onclick="resetCalculator()">Reset</button>
+        </div>
+    </div>
+</div>
+
+<div id="results" class="results">
+    <h3>Cognitive Load Assessment</h3>
+    
+    <div class="score-display">
+        <div class="score-card">
+            <h4>Cognitive Load Score</h4>
+            <div id="score" class="score-number low">0</div>
+            <div class="score-label" id="score-label">Very Low</div>
+        </div>
+        <div class="score-card">
+            <h4>Overall Assessment</h4>
+            <div id="assessment" style="font-size: 1rem; color: var(--text-secondary); margin-top: 0.5rem;">Calculating...</div>
+        </div>
+    </div>
+
+    <div class="recommendations">
+        <h4>Recommendations</h4>
+        <div id="recommendations-list"></div>
+    </div>
+</div>
+
 
 </section>
 
 <section>
     <h2>Use Cases</h2>
+    <p>
+        Apply UX psychology principles to solve real design challenges:
+    </p>
     <ul>
-        <li>Improving UX with behavioral psychology principles</li>
-        <li>Reducing user friction and cognitive overload</li>
-        <li>Optimizing UI layouts for faster decision-making</li>
-        <li>Designing intuitive and user-friendly interfaces</li>
-        <li>Increasing conversions through better UX design</li>
+        <li><strong>Improving UX with behavioral psychology principles</strong> – Understand cognitive load, attention, and decision-making in your interfaces</li>
+        <li><strong>Reducing user friction and cognitive overload</strong> – Simplify flows before they reach development</li>
+        <li><strong>Optimizing UI layouts for faster decision-making</strong> – Use Hick's Law and other principles to speed up user choices</li>
+        <li><strong>Designing intuitive and user-friendly interfaces</strong> – Align designs with mental models and familiar patterns</li>
+        <li><strong>Increasing conversions through better UX design</strong> – Lower cognitive load leads to faster, more confident user actions</li>
     </ul>
 </section>
 
 <section>
-    <h2>Long-Tail Search Queries</h2>
+    <h2>Cognitive Load & UX Psychology FAQ</h2>
+
+
+<div class="faq-item">
+    <div class="faq-question" onclick="toggleFAQ(this)">
+        What is cognitive load in UX design?
+        <span class="faq-toggle">▼</span>
+    </div>
+    <div class="faq-answer">
+        Cognitive load is the amount of mental effort required to use an interface. High cognitive load means users must think hard to complete tasks, leading to confusion, slower performance, and abandonment. Low cognitive load means users can navigate intuitively with minimal mental effort. The goal of UX design is to reduce cognitive load through clear information architecture, familiar patterns, and progressive disclosure of information.
+    </div>
+</div>
+
+<div class="faq-item">
+    <div class="faq-question" onclick="toggleFAQ(this)">
+        How does cognitive load relate to decision fatigue?
+        <span class="faq-toggle">▼</span>
+    </div>
+    <div class="faq-answer">
+        Decision fatigue occurs when users must make too many choices in sequence, leading to poor decisions or choice paralysis. It's related to cognitive load but distinct. You can have low cognitive load but high decision fatigue (too many simple choices), or high cognitive load but few decisions (one complex task). Both metrics are important for UX design—minimize both to create smooth user experiences.
+    </div>
+</div>
+
+<div class="faq-item">
+    <div class="faq-question" onclick="toggleFAQ(this)">
+        What score should I aim for?
+        <span class="faq-toggle">▼</span>
+    </div>
+    <div class="faq-answer">
+        It depends on your audience and interface type. Consumer-facing products should aim for 20-35 (low cognitive load). Professional tools can tolerate 40-55 (moderate load) if users are trained. Technical documentation can go up to 60+ (high load) for expert audiences. General rule: lower is better, but context matters. Test with real users to validate your score.
+    </div>
+</div>
+
+<div class="faq-item">
+    <div class="faq-question" onclick="toggleFAQ(this)">
+        Can I use this calculator for existing designs?
+        <span class="faq-toggle">▼</span>
+    </div>
+    <div class="faq-answer">
+        Yes! This calculator works for both design-phase planning and retrospective analysis of existing interfaces. However, for detailed auditing of published pages, tools like DoxLayer's Cognitive Load Auditor are more comprehensive because they analyze actual text complexity and page structure. Use our calculator for quick design validation and comparisons.
+    </div>
+</div>
+
+<div class="faq-item">
+    <div class="faq-question" onclick="toggleFAQ(this)">
+        How is this calculator different from Cogulator?
+        <span class="faq-toggle">▼</span>
+    </div>
+    <div class="faq-answer">
+        Cogulator is a desktop tool built by MITRE for detailed GOMS (Goals, Operators, Methods, Selection) modeling—it's designed for researchers and human performance specialists. Our calculator is web-based and designed for UX designers making quick decisions during the design phase. Cogulator goes much deeper; our tool prioritizes simplicity and speed. Choose based on your expertise and timeline.
+    </div>
+</div>
+
+<div class="faq-item">
+    <div class="faq-question" onclick="toggleFAQ(this)">
+        What is Fitts's Law and Hick's Law?
+        <span class="faq-toggle">▼</span>
+    </div>
+    <div class="faq-answer">
+        <strong>Fitts's Law</strong> states that the time to reach a target is proportional to the distance and inversely proportional to the size. In UI terms: make buttons larger or put them closer to where users need them. <strong>Hick's Law</strong> states that the time to make a decision increases with the number of choices. In UI terms: reduce menu items, simplify choice architecture. Both principles help reduce cognitive load and speed up user interactions.
+    </div>
+</div>
+
+<div class="faq-item">
+    <div class="faq-question" onclick="toggleFAQ(this)">
+        Should I use the same cognitive load for all user types?
+        <span class="faq-toggle">▼</span>
+    </div>
+    <div class="faq-answer">
+        No. Expert users (like software developers or traders) can handle higher cognitive load than novices. Design for your specific audience. For consumer products, assume low expertise and aim for low cognitive load (20-35). For professional tools, you can increase it (40-55) if your users are trained. Always validate assumptions with user testing.
+    </div>
+</div>
+
+
+</section>
+
+<section>
+    <h2>Long-Tail Search Queries & Keywords</h2>
+    <p>
+        Our tools cover a wide range of UX psychology topics and search intents:
+    </p>
     <ul>
         <li>cognitive load calculator for ux design</li>
         <li>fitts law checker ui usability tool</li>
@@ -123,14 +899,155 @@
         <li>decision fatigue analysis in user experience</li>
         <li>visual hierarchy scoring tool for interfaces</li>
         <li>mental model mismatch detection ux design</li>
+        <li>preventive ux design tools</li>
+        <li>ux psychology calculator</li>
+        <li>interaction design cognitive load measurement</li>
     </ul>
 </section>
 
 <footer>
-    <p>
-        Design smarter, more intuitive interfaces with UX psychology tools built to optimize human-centered experiences.
-    </p>
+    <p>Design smarter, more intuitive interfaces with UX psychology tools built to optimize human-centered experiences.</p>
+    <p>© 2025 UX Psychology Tools. Built for designers who care about user behavior.</p>
 </footer>
+
+<script>
+    function calculateCognitiveLoad() {
+        // Get input values
+        const uiElements = parseInt(document.getElementById('ui-elements').value) || 0;
+        const decisionPoints = parseInt(document.getElementById('decision-points').value) || 0;
+        const textDensity = parseInt(document.getElementById('text-density').value) || 1;
+        const interactionComplexity = parseInt(document.getElementById('interaction-complexity').value) || 1;
+        const visualHierarchy = parseInt(document.getElementById('visual-hierarchy').value) || 1;
+        const cognitiveShortcuts = parseInt(document.getElementById('cognitive-shortcuts').value) || 1;
+        const memoryLoad = parseInt(document.getElementById('memory-load').value) || 1;
+
+        // Calculate base score (0-100)
+        let score = 0;
+
+        // UI Elements impact (max 25 points)
+        if (uiElements <= 5) score += 5;
+        else if (uiElements <= 10) score += 10;
+        else if (uiElements <= 20) score += 15;
+        else if (uiElements <= 40) score += 20;
+        else score += 25;
+
+        // Decision Points impact (max 20 points)
+        score += decisionPoints * 2;
+
+        // Text Density impact (max 15 points)
+        score += textDensity * 5;
+
+        // Interaction Complexity impact (max 15 points)
+        score += interactionComplexity * 4;
+
+        // Visual Hierarchy impact (reduce score, max -10 points)
+        score -= (5 - visualHierarchy) * 2;
+
+        // Cognitive Shortcuts / Familiar Patterns (reduce score, max -10 points)
+        score -= (5 - cognitiveShortcuts) * 2;
+
+        // Memory Load impact (max 20 points)
+        score += memoryLoad * 4;
+
+        // Clamp score to 0-100
+        score = Math.max(0, Math.min(100, score));
+
+        // Display results
+        displayResults(score);
+    }
+
+    function displayResults(score) {
+        const resultsDiv = document.getElementById('results');
+        const scoreDiv = document.getElementById('score');
+        const scoreLabel = document.getElementById('score-label');
+        const assessment = document.getElementById('assessment');
+        const recommendations = document.getElementById('recommendations-list');
+
+        scoreDiv.textContent = Math.round(score);
+
+        // Set score classification
+        if (score < 25) {
+            scoreDiv.className = 'score-number low';
+            scoreLabel.textContent = 'Very Low';
+            assessment.textContent = 'Your design has minimal cognitive load. Users should find it intuitive and easy to navigate.';
+        } else if (score < 40) {
+            scoreDiv.className = 'score-number low';
+            scoreLabel.textContent = 'Low';
+            assessment.textContent = 'Good cognitive load for most consumer interfaces. Users should be able to navigate with minimal effort.';
+        } else if (score < 55) {
+            scoreDiv.className = 'score-number medium';
+            scoreLabel.textContent = 'Moderate';
+            assessment.textContent = 'Acceptable for professional tools. Consider if your users are trained or expert. Test with users to validate.';
+        } else if (score < 75) {
+            scoreDiv.className = 'score-number medium';
+            scoreLabel.textContent = 'High';
+            assessment.textContent = 'Your design is mentally demanding. Consider simplifying for broader audiences or providing better guidance.';
+        } else {
+            scoreDiv.className = 'score-number high';
+            scoreLabel.textContent = 'Very High';
+            assessment.textContent = 'Very high cognitive load. Users may struggle with this interface. Consider significant simplification.';
+        }
+
+        // Generate recommendations
+        let recs = [];
+
+        if (parseInt(document.getElementById('ui-elements').value) > 30) {
+            recs.push('Reduce the number of UI elements. Consider progressive disclosure or breaking the interface into multiple screens.');
+        }
+
+        if (parseInt(document.getElementById('decision-points').value) > 5) {
+            recs.push('Simplify user flows by reducing decision points. Use defaults and recommendations to guide choices.');
+        }
+
+        if (parseInt(document.getElementById('text-density').value) >= 3) {
+            recs.push('Decrease information density. Add whitespace, break content into sections, and use visual hierarchy to guide attention.');
+        }
+
+        if (parseInt(document.getElementById('interaction-complexity').value) >= 3) {
+            recs.push('Simplify interactions. Consider removing animations, reducing drag-and-drop complexity, or spreading tasks across steps.');
+        }
+
+        if (parseInt(document.getElementById('visual-hierarchy').value) >= 3) {
+            recs.push('Improve visual hierarchy. Use size, color, and positioning to clearly distinguish primary and secondary actions.');
+        }
+
+        if (parseInt(document.getElementById('cognitive-shortcuts').value) >= 3) {
+            recs.push('Incorporate familiar UI patterns. Use standard conventions for navigation, forms, and interactions.');
+        }
+
+        if (parseInt(document.getElementById('memory-load').value) >= 4) {
+            recs.push('Reduce memory load by keeping related information visible. Avoid hiding critical details behind navigation.');
+        }
+
+        if (recs.length === 0) {
+            recs.push('Your design looks good! Continue user testing to validate that the cognitive load matches your target audience.');
+        }
+
+        recommendations.innerHTML = recs.map(rec => `<div class="rec-item">✓ ${rec}</div>`).join('');
+
+        resultsDiv.classList.add('show');
+        resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function resetCalculator() {
+        document.getElementById('ui-elements').value = 10;
+        document.getElementById('decision-points').value = 3;
+        document.getElementById('text-density').value = 2;
+        document.getElementById('interaction-complexity').value = 2;
+        document.getElementById('visual-hierarchy').value = 2;
+        document.getElementById('cognitive-shortcuts').value = 2;
+        document.getElementById('memory-load').value = 2;
+        document.getElementById('results').classList.remove('show');
+    }
+
+    function toggleFAQ(element) {
+        const answer = element.nextElementSibling;
+        const toggle = element.querySelector('.faq-toggle');
+
+        answer.classList.toggle('show');
+        toggle.classList.toggle('open');
+    }
+</script>
 
 </body>
 </html>
